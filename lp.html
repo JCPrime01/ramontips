@@ -15,15 +15,22 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1370157767963562');
+    fbq('init', '961619428689288');
     fbq('track', 'PageView');
+
+    var BASE_REDIRECT = "https://track.grupojc.cc/track/b215d5e4-a406-450d-bc5f-f9687470105e/redirect";
+    var PAGE_PARAMS = new URLSearchParams(location.search).toString();
+
+    function getRedirectUrl() {
+      return PAGE_PARAMS ? BASE_REDIRECT + "?" + PAGE_PARAMS : BASE_REDIRECT;
+    }
 
     async function dispararLead(e) {
       e.preventDefault();
-      const eventId = 'cr_' + Date.now();
-      
-      fbq('track', 'Search', { currency: 'BRL', value: 0 }, { eventID: eventId });
-      
+      const eventId = 'CompleteRegistration' + Date.now();
+
+      fbq('track', 'CompleteRegistration', {}, { eventID: eventId });
+
       try {
         await fetch('https://track-jp-production.up.railway.app/api/lead', {
           method: 'POST',
@@ -36,8 +43,8 @@
           })
         });
       } catch(err) {}
-      
-      window.location.href = 'https://di.insightshub.cc/';
+
+      window.location.href = getRedirectUrl();
     }
     </script>
     <!-- End Facebook Pixel Code -->
@@ -229,7 +236,7 @@
                 
                 <p class="sub-text">As entradas serão enviadas em instantes!</p>
                 
-                <a href="https://di.insightshub.cc/" class="cta-button" onclick="dispararLead(event)">FALE COMIGO AGORA!</a>
+                <a href="https://track.grupojc.cc/track/b215d5e4-a406-450d-bc5f-f9687470105e/redirect" class="cta-button" onclick="dispararLead(event)">FALE COMIGO AGORA!</a>
             </div>
         </div>
     </section>
