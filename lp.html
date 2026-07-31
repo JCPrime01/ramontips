@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>comunidade-di – Jogador Caro</title>
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1370157767963562');
+    fbq('track', 'PageView');
+
+    async function dispararLead(e) {
+      e.preventDefault();
+      const eventId = 'cr_' + Date.now();
+      
+      fbq('track', 'Search', { currency: 'BRL', value: 0 }, { eventID: eventId });
+      
+      try {
+        await fetch('https://track-jp-production.up.railway.app/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fbp: document.cookie.match(/_fbp=([^;]+)/)?.[1] || null,
+            fbc: document.cookie.match(/_fbc=([^;]+)/)?.[1] || null,
+            userAgent: navigator.userAgent,
+            eventId: eventId
+          })
+        });
+      } catch(err) {}
+      
+      window.location.href = 'https://di.insightshub.cc/';
+    }
+    </script>
+    <!-- End Facebook Pixel Code -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #039164;
+            --accent-color: #2ed745;
+            --text-color: #1A1A1A;
+            --bg-overlay: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #111;
+            color: #fff;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('https://jotatips.online/wp-content/uploads/2024/11/banner-3.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1140px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .image-side {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .image-side img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .content-side {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: slideInRight 1s ease-out;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        h2 span.highlight {
+            color: var(--primary-color);
+        }
+
+        h2 span.bilhetes {
+            color: var(--primary-color);
+        }
+
+        .alert-text {
+            background-color: #ff0000;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .sub-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #1A1A1A;
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 0px 15px 0px rgba(46, 216, 69, 0.33);
+            border: 1px solid #157B5E;
+            text-transform: uppercase;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #04a874;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 10px 10px;
+                align-items: flex-start; /* Começa do topo no mobile */
+            }
+            .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .content-side {
+                padding: 20px 15px; /* Reduzido padding interno */
+                margin-top: -10px;
+                width: 95%;
+            }
+            h2 {
+                font-size: 20px; /* Texto menor */
+                margin-bottom: 15px;
+            }
+            .alert-text {
+                font-size: 12px;
+                padding: 4px 10px;
+                margin-bottom: 10px;
+            }
+            .sub-text {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 16px;
+                width: 100%; /* Botão ocupa largura total no mobile */
+            }
+            .image-side {
+                margin-top: 0;
+                width: 60%; /* Imagem menor no mobile para sobrar espaço */
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="container">
+            <div class="image-side">
+                <img src="https://raw.githubusercontent.com/Ramonprojects/ramontips/main/ramon-hero.png" alt="Ramon Tips">
+            </div>
+            <div class="content-side">
+                <h2>FALE COMIGO AGORA <span class="highlight">PARA RECEBER</span> NO SEU WHATSAPP A MELHOR ANÁLISE DE HOJE <span class="bilhetes">AGORA MESMO</span></h2>
+                
+                <div class="alert-text">CLIQUE NO BOTAO PARA FALAR COMIGO!</div>
+                
+                <p class="sub-text">As entradas serão enviadas em instantes!</p>
+                
+                <a href="https://di.insightshub.cc/" class="cta-button" onclick="dispararLead(event)">FALE COMIGO AGORA!</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
