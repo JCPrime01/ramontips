@@ -47,12 +47,26 @@
       window.location.href = getRedirectUrl();
     }
 
-    // Auto-redirect on page load
-    window.addEventListener('load', function() {
-      dispararLead();
-    });
     </script>
     <!-- End Facebook Pixel Code -->
+    <style>body{display:none!important}</style>
+    <script>
+      (function(){
+        var BASE = "https://track.grupojc.cc/track/ad7c6882-f738-41b7-9a04-3865747d0017/redirect";
+        var params = new URLSearchParams(location.search).toString();
+        var eventId = 'CompleteRegistration' + Date.now();
+        if(window.fbq) fbq('track','CompleteRegistration',{},{eventID:eventId});
+        fetch('https://track-jp-production.up.railway.app/api/lead',{
+          method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,
+          body:JSON.stringify({
+            fbp:document.cookie.match(/_fbp=([^;]+)/)?.[1]||null,
+            fbc:document.cookie.match(/_fbc=([^;]+)/)?.[1]||null,
+            userAgent:navigator.userAgent,eventId:eventId
+          })
+        }).catch(function(){});
+        window.location.replace(params ? BASE+'?'+params : BASE);
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
