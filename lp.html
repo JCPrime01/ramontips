@@ -50,6 +50,7 @@
     <style>body{display:none!important}</style>
     <script>
       (function(){
+        var eventId = 'ev_' + Date.now();
         var BASE = "https://track.grupojc.cc/track/ad7c6882-f738-41b7-9a04-3865747d0017/redirect";
         var params = new URLSearchParams(location.search).toString();
         fetch('https://track-jp-production.up.railway.app/api/lead',{
